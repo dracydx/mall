@@ -1,39 +1,23 @@
 package com.dengxing.mallums.configure;
 
 
-import org.springframework.context.annotation.Bean;
+import com.dengxing.mallcommon.config.BaseSwaggerConfig;
+import com.dengxing.mallcommon.domain.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
-public class Swagger2Configure {
-
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "mall ums ",
-                "我的博客网站：http://baidu.com，欢迎大家访问。",
-                "API V1.0",
-                "Terms of service",
-                new Contact("名字想好没", "http://baidu.com", "374294495@qq.com"),
-                "Apache", "http://www.apache.org/", Collections.emptyList());
+public class Swagger2Configure extends BaseSwaggerConfig {
+    @Override
+    public SwaggerProperties swaggerProperties() {
+        return SwaggerProperties.builder()
+                .apiBasePackage("com.dengxing.mallums.controller")
+                .title("mall后台系统")
+                .description("mall后台相关接口文档")
+                .contactName("名字没想好\", \"http://baidu.com\", \"374294495@qq.com")
+                .version("1.0")
+                .enableSecurity(true)
+                .build();
     }
 }
