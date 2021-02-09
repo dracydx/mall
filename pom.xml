@@ -23,6 +23,10 @@
         <module>mall-ums</module>
         <module>mall-common</module>
         <module>mall-gateway</module>
+        <module>mall-monitor</module>
+        <module>mall-cms</module>
+        <module>mall-pms</module>
+        <module>mall-oms</module>
     </modules>
 
     <properties>
