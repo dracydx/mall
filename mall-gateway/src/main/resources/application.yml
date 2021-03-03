@@ -42,11 +42,11 @@ spring:
             filters:
               - SwaggerHeaderFilter
               - StripPrefix=1
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          jwk-set-uri: 'http://localhost:8201/mall-auth/rsa/publicKey' #配置RSA的公钥访问地址
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://localhost:8201/mall-auth/rsa/publicKey' #配置RSA的公钥访问地址
 #  redis:
 #    database: 0
 #    port: 6379

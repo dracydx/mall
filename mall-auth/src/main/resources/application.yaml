@@ -1,0 +1,13 @@
+server:
+  port: 8401
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: "*"
+
+feign:
+  okhttp:
+    enabled: true

@@ -1,5 +1,6 @@
 package com.dengxing.mallums.service;
 
+import com.dengxing.mallcommon.api.CommonResult;
 import com.dengxing.mallums.entity.UmsAdmin;
 import java.util.List;
 
@@ -52,4 +53,12 @@ public interface UmsAdminService {
      */
     boolean deleteById(Long id);
 
+
+    /**
+     * 登录功能
+     * @param username 用户名
+     * @param password 密码
+     * @return 调用认证中心返回结果
+     */
+    CommonResult login(String username, String password);
 }

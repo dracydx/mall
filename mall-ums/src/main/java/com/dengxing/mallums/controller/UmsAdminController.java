@@ -1,11 +1,15 @@
 package com.dengxing.mallums.controller;
 
+import com.dengxing.mallcommon.api.CommonResult;
+import com.dengxing.mallcommon.domain.UserDto;
+import com.dengxing.mallums.dto.UmsAdminLoginParam;
 import com.dengxing.mallums.entity.UmsAdmin;
 import com.dengxing.mallums.service.UmsAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +30,17 @@ public class UmsAdminController {
      */
     @Resource
     private UmsAdminService umsAdminService;
+
+
+
+    @ApiOperation("登陆")
+    @GetMapping("login")
+    public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam){
+
+        return umsAdminService.login(umsAdminLoginParam.getUsername(),umsAdminLoginParam.getPassword());
+
+    }
+
 
     /**
      * 通过主键查询单条数据

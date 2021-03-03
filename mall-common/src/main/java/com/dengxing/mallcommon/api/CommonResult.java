@@ -2,7 +2,7 @@ package com.dengxing.mallcommon.api;
 
 /**
  * 公共返回
- * author : dengxing
+ * @author : dengxing
  * @param <T>
  */
 public class CommonResult<T> {
