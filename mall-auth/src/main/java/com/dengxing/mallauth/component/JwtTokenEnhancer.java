@@ -1,6 +1,5 @@
 package com.dengxing.mallauth.component;
 
-import com.dengxing.mallauth.domain.SecurityUser;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -14,11 +13,8 @@ import java.util.Map;
 public class JwtTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        Map<String, Object> info = new HashMap<>();
-        //把用户ID设置到JWT中
-        info.put("id", securityUser.getId());
-        info.put("client_id", securityUser.getClientId());
+        Map<String, Object> info = new HashMap<>(10);
+        info.put("enhance", "enhance info");
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

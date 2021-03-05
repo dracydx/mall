@@ -34,7 +34,6 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
 
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         super.configure(clients);
@@ -63,9 +62,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         List<TokenEnhancer> delegates = new ArrayList<>();
         delegates.add(jwtTokenEnhancer);
         delegates.add(accessTokenConverter());
-        enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
+        enhancerChain.setTokenEnhancers(delegates);
         endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService) //配置加载用户信息的服务
+                .userDetailsService(userDetailsService)
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(enhancerChain);
     }
@@ -78,7 +77,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setKeyPair(keyPair());
+//        jwtAccessTokenConverter.setKeyPair(keyPair());
         return jwtAccessTokenConverter;
     }
 

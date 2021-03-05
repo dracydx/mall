@@ -1,57 +1,47 @@
 package com.dengxing.mallauth.service.impl;
 
-import com.dengxing.mallauth.constant.MessageConstant;
-import com.dengxing.mallauth.domain.SecurityUser;
-import com.dengxing.mallauth.service.UmsMemberService;
-import com.dengxing.mallauth.service.UmsService;
-import com.dengxing.mallcommon.constant.AuthConstant;
-import com.dengxing.mallcommon.domain.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
+
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * @author dengxing
+ */
 @Service
 public class UserServiceImpl implements UserDetailsService {
+    private List<User> userList;
 
     @Autowired
-    private UmsService adminService;
-    @Autowired
-    private UmsMemberService memberService;
-    @Autowired
-    private HttpServletRequest request;
+    private PasswordEncoder passwordEncoder;
 
+    @PostConstruct
+    public void initData() {
+        String password = passwordEncoder.encode("123456");
+        userList = new ArrayList<>();
+        userList.add(new User("macro", password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
+        userList.add(new User("andy", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+        userList.add(new User("mark", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        String clientId = request.getParameter("client_id");
-        UserDto userDto;
-        if (AuthConstant.ADMIN_CLIENT_ID.equals(clientId)) {
-            userDto = adminService.loadUserByUsername(username);
+        List<User> findUserList = userList.stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(findUserList)) {
+            return findUserList.get(0);
         } else {
-            userDto = memberService.loadUserByUsername(username);
+            throw new UsernameNotFoundException("用户名或密码错误");
         }
-        if (userDto == null) {
-            throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);
-        }
-        userDto.setClientId(clientId);
-        SecurityUser securityUser = new SecurityUser(userDto);
-        if (!securityUser.isEnabled()) {
-            throw new DisabledException(MessageConstant.ACCOUNT_DISABLED);
-        } else if (!securityUser.isAccountNonLocked()) {
-            throw new LockedException(MessageConstant.ACCOUNT_LOCKED);
-        } else if (!securityUser.isAccountNonExpired()) {
-            throw new AccountExpiredException(MessageConstant.ACCOUNT_EXPIRED);
-        } else if (!securityUser.isCredentialsNonExpired()) {
-            throw new CredentialsExpiredException(MessageConstant.CREDENTIALS_EXPIRED);
-        }
-        return securityUser;
     }
 }
