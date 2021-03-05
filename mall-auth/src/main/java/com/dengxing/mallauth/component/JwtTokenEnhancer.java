@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author dengxing
+ */
 @Component
 public class JwtTokenEnhancer implements TokenEnhancer {
     @Override

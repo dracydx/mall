@@ -5,6 +5,9 @@ import com.dengxing.mallcommon.domain.SwaggerProperties;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author dengxing
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2Configure extends BaseSwaggerConfig {

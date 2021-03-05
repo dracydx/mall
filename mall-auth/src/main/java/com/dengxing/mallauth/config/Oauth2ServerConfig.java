@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author dengxing
+ */
 @AllArgsConstructor
 @Configuration
 @EnableAuthorizationServer

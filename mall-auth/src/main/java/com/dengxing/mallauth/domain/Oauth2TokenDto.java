@@ -7,9 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * Oauth2获取Token返回信息封装
- * Created by macro on 2020/7/17.
+ * @author dengxing
  */
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Builder
