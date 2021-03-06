@@ -6,7 +6,7 @@ spring:
       config:
         server-addr: http://34.92.86.34:8848
         file-extension: yaml
-        namespace:  554fb350-f98f-448e-b88b-55e10c4ca023
+        namespace:  11ce6c68-3224-43ef-9c08-315a7dab0833
 
 
 logging:

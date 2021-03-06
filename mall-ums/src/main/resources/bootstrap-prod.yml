@@ -6,3 +6,4 @@ spring:
       config:
         server-addr: http://34.92.86.34:8848
         file-extension: yaml
+        namespace: 11ce6c68-3224-43ef-9c08-315a7dab0833
