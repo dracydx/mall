@@ -1,5 +1,8 @@
 package com.dengxing.mallauth.constant;
 
+/**
+ * @author dengxing
+ */
 public class MessageConstant {
 
     public static final String LOGIN_SUCCESS = "登录成功!";
