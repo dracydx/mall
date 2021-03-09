@@ -8,8 +8,10 @@ import com.dengxing.mallcommon.domain.UserDto;
 import com.dengxing.mallums.entity.UmsAdmin;
 import com.dengxing.mallums.dao.UmsAdminDao;
 import com.dengxing.mallums.entity.UmsRole;
+import com.dengxing.mallums.service.AuthService;
 import com.dengxing.mallums.service.UmsAdminService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +31,11 @@ import java.util.stream.Collectors;
 public class UmsAdminServiceImpl implements UmsAdminService {
     @Resource
     private UmsAdminDao umsAdminDao;
+    @Autowired
+    private AuthService authService;
+
+
+
 
     /**
      * 通过ID查询单条数据
@@ -100,7 +107,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         params.put("grant_type", "password");
         params.put("username", username);
         params.put("password", password);
-        return null;
+        CommonResult accessToken = authService.getAccessToken(params);
+        return accessToken;
     }
 
 
