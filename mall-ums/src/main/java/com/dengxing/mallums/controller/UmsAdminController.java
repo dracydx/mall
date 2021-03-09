@@ -7,11 +7,10 @@ import com.dengxing.mallums.entity.UmsAdmin;
 import com.dengxing.mallums.service.UmsAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class UmsAdminController {
 
 
     @ApiOperation("登陆")
-    @GetMapping("login")
+    @PostMapping("login")
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam){
         return umsAdminService.login(umsAdminLoginParam.getUsername(),umsAdminLoginParam.getPassword());
     }
