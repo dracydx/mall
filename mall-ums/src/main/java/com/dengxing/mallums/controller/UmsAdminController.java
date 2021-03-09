@@ -66,4 +66,12 @@ public class UmsAdminController {
         return umsAdminService.queryAllByLimit(pi, ps);
     }
 
+    @ApiOperation("根据用户名获取通用用户信息")
+    @RequestMapping(value = "/loadByUsername", method = RequestMethod.GET)
+    @ResponseBody
+    public UserDto loadUserByUsername(@RequestParam String username) {
+        UserDto userDTO = umsAdminService.loadUserByUsername(username);
+        return userDTO;
+    }
+
 }

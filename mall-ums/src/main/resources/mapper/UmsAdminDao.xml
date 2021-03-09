@@ -70,6 +70,13 @@
             </if>
         </where>
     </select>
+    <select id="queryByName" resultType="com.dengxing.mallums.entity.UmsAdmin">
+        select
+            id, username, password, icon, email, nick_name, note, create_time, login_time, status
+        from mall.ums_admin
+        where username = #{name}
+
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

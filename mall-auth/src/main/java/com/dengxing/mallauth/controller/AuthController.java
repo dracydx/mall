@@ -28,29 +28,29 @@ import java.util.Map;
 public class AuthController {
 
 
-//    @Autowired
-//    private TokenEndpoint tokenEndpoint;
-//
-//
-//    @ApiOperation("Oauth2获取token")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "grant_type", value = "授权模式", required = true),
-//            @ApiImplicitParam(name = "client_id", value = "Oauth2客户端ID", required = true),
-//            @ApiImplicitParam(name = "client_secret", value = "Oauth2客户端秘钥", required = true),
-//            @ApiImplicitParam(name = "refresh_token", value = "刷新token"),
-//            @ApiImplicitParam(name = "username", value = "登录用户名"),
-//            @ApiImplicitParam(name = "password", value = "登录密码")
-//    })
-//    @RequestMapping(value = "/token", method = RequestMethod.POST)
-//    public CommonResult<Oauth2TokenDto> postAccessToken(@ApiIgnore Principal principal, @ApiIgnore @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
-//        OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
-//        final Oauth2TokenDto authorization = Oauth2TokenDto.builder()
-//                .token(oAuth2AccessToken.getValue())
-//                .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
-//                .expiresIn(oAuth2AccessToken.getExpiresIn())
-//                .tokenHead("Authorization")
-//                .build();
-//
-//        return CommonResult.success(authorization);
-//    }
+    @Autowired
+    private TokenEndpoint tokenEndpoint;
+
+
+    @ApiOperation("Oauth2获取token")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "grant_type", value = "授权模式", required = true),
+            @ApiImplicitParam(name = "client_id", value = "Oauth2客户端ID", required = true),
+            @ApiImplicitParam(name = "client_secret", value = "Oauth2客户端秘钥", required = true),
+            @ApiImplicitParam(name = "refresh_token", value = "刷新token"),
+            @ApiImplicitParam(name = "username", value = "登录用户名"),
+            @ApiImplicitParam(name = "password", value = "登录密码")
+    })
+    @RequestMapping(value = "/token", method = RequestMethod.POST)
+    public CommonResult<Oauth2TokenDto> postAccessToken(@ApiIgnore Principal principal, @ApiIgnore @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+        OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
+        final Oauth2TokenDto authorization = Oauth2TokenDto.builder()
+                .token(oAuth2AccessToken.getValue())
+                .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
+                .expiresIn(oAuth2AccessToken.getExpiresIn())
+                .tokenHead("Authorization")
+                .build();
+
+        return CommonResult.success(authorization);
+    }
 }

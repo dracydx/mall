@@ -62,4 +62,14 @@ public interface UmsAdminDao {
      */
     int deleteById(Long id);
 
+
+    /**
+     * @Author dengxing
+     * @Description //TODO
+     * @Date
+     * @Param name
+     **/
+    UmsAdmin queryByName(String name);
+
+
 }

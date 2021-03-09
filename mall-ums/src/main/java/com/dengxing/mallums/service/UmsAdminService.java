@@ -1,6 +1,7 @@
 package com.dengxing.mallums.service;
 
 import com.dengxing.mallcommon.api.CommonResult;
+import com.dengxing.mallcommon.domain.UserDto;
 import com.dengxing.mallums.entity.UmsAdmin;
 import java.util.List;
 
@@ -61,4 +62,6 @@ public interface UmsAdminService {
      * @return 调用认证中心返回结果
      */
     CommonResult login(String username, String password);
+
+    UserDto loadUserByUsername(String username);
 }
