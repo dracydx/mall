@@ -36,9 +36,7 @@ public class UmsAdminController {
     @ApiOperation("登陆")
     @GetMapping("login")
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam){
-
         return umsAdminService.login(umsAdminLoginParam.getUsername(),umsAdminLoginParam.getPassword());
-
     }
 
 
